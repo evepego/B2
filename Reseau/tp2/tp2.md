@@ -20,6 +20,7 @@ Machine | `net1`
 #### ToDo
 
 * 🌞 mettre en place la topologie ci-dessus
+![topo](topo.png)
 * 🌞 faire communiquer les deux PCs
   * avec un `ping` qui fonctionne
     * déterminer le protocole utilisé par `ping` à l'aide de Wireshark

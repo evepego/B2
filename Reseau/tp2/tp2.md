@@ -102,7 +102,7 @@ Machine | `net1`
   84 bytes from 10.2.2.1 icmp_seq=2 ttl=64 time=0.319 ms
   ```
 * 🌞 analyser la table MAC d'un switch
-  * `show mac address-table`:
+  * `show mac address-table` switch1 :
   ```bash
   IOU1#show mac address-table
             Mac Address Table
@@ -117,6 +117,7 @@ Machine | `net1`
   ```
   * comprendre/expliquer chaque ligne
 * 🐙 en lançant Wireshark sur les liens des switches, il y a des trames CDP qui circulent. Quoi qu'est-ce ?
+C'est le Cisco Discovery Protocol.
 
 #### Mise en évidence du Spanning Tree Protocol
 
@@ -133,7 +134,67 @@ Si on considère les trois liens qui unissent les switches :
 On va regarder comment STP a été configuré.
 
 * 🌞 déterminer les informations STP
-  * à l'aide des [commandes dédiées au protocole](/memo/cli-cisco.md#stp)
+```bash
+IOU1#show spanning-tree
+
+VLAN0001
+  Spanning tree enabled protocol rstp
+  Root ID    Priority    32769
+             Address     aabb.cc00.0100
+             This bridge is the root
+             Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
+
+  Bridge ID  Priority    32769  (priority 32768 sys-id-ext 1)
+             Address     aabb.cc00.0100
+             Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
+             Aging Time  300 sec
+
+Interface           Role Sts Cost      Prio.Nbr Type
+------------------- ---- --- --------- -------- --------------------------------
+Et0/0               Desg FWD 100       128.1    Shr
+Et0/1               Desg FWD 100       128.2    Shr
+Et0/2               Desg FWD 100       128.3    Shr
+Et0/3               Desg FWD 100       128.4    Shr
+Et1/0               Desg FWD 100       128.5    Shr
+Et1/1               Desg FWD 100       128.6    Shr
+Et1/2               Desg FWD 100       128.7    Shr
+Et1/3               Desg FWD 100       128.8    Shr
+Et2/0               Desg FWD 100       128.9    Shr
+Et2/1               Desg FWD 100       128.10   Shr
+Et2/2               Desg FWD 100       128.11   Shr
+Et2/3               Desg FWD 100       128.12   Shr
+Et3/0               Desg FWD 100       128.13   Shr
+Et3/1               Desg FWD 100       128.14   Shr
+Et3/2               Desg FWD 100       128.15   Shr
+Et3/3               Desg FWD 100       128.16   Shr
+
+IOU1#show spanning-tree bridge
+
+                                                   Hello  Max  Fwd
+Vlan                         Bridge ID              Time  Age  Dly  Protocol
+---------------- --------------------------------- -----  ---  ---  --------
+VLAN0001         32769 (32768,   1) aabb.cc00.0100    2    20   15  rstp
+IOU1#show spanning-tree summary
+Switch is in rapid-pvst mode
+Root bridge for: VLAN0001
+Extended system ID                      is enabled
+Portfast Default                        is disabled
+Portfast Edge BPDU Guard Default        is disabled
+Portfast Edge BPDU Filter Default       is disabled
+Loopguard Default                       is disabled
+PVST Simulation Default                 is enabled but inactive in rapid-pvst mode
+Bridge Assurance                        is enabled
+EtherChannel misconfig guard            is enabled
+Configured Pathcost method used is short
+UplinkFast                              is disabled
+BackboneFast                            is disabled
+
+Name                   Blocking Listening Learning Forwarding STP Active
+---------------------- -------- --------- -------- ---------- ----------
+VLAN0001                     0         0        0         16         16
+---------------------- -------- --------- -------- ---------- ----------
+1 vlan                       0         0        0         16         16
+```
 * 🌞 faire un schéma en représentant les informations STP
   * rôle des switches (qui est le root bridge)
   * rôle de chacun des ports

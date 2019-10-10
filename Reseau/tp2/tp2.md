@@ -22,8 +22,11 @@ Machine | `net1`
 * 🌞 mettre en place la topologie ci-dessus
 ![topo](topo.png)
 * 🌞 faire communiquer les deux PCs
-  * avec un `ping` qui fonctionne
-  ![wireshark](capture.pcapng)
+![wireshark](cap1.png)
+  * `ping 10.2.1.2`:  
+  Protocole utilisé : ICMP (Internet Control Message Protocol)
+  * `ping 10.2.1.1`:  
+  protocole utilisé: ICMP (Internet Control Message Protocol)
   * analyser les échanges ARP
     * utiliser Wireshark et mettre en évidence l'échange ARP entre les deux machines (`ARP Request` et `ARP Reply`)
     * corréler avec les tables ARP des différentes machines

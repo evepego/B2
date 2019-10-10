@@ -199,7 +199,7 @@ VLAN0001                     0         0        0         16         16
   * rôle des switches (qui est le root bridge)
   * rôle de chacun des ports
 * 🌞 confirmer les informations STP
-  * effectuer un `ping` d'une machine à une autre
+![wireshark](cap2.png)
   * vérifier que les trames passent bien par le chemin attendu (Wireshark)
 * 🌞 ainsi, déterminer quel lien a été désactivé par STP
 * 🌞 faire un schéma qui explique le trajet d'une requête ARP lorsque PC1 ping PC3, et de sa réponse

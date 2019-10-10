@@ -23,7 +23,7 @@ Machine | `net1`
 ![topo](topo.png)
 * 🌞 faire communiquer les deux PCs
   * avec un `ping` qui fonctionne
-    * déterminer le protocole utilisé par `ping` à l'aide de Wireshark
+  ![wireshark](capture.pcapng)
   * analyser les échanges ARP
     * utiliser Wireshark et mettre en évidence l'échange ARP entre les deux machines (`ARP Request` et `ARP Reply`)
     * corréler avec les tables ARP des différentes machines

@@ -102,7 +102,19 @@ Machine | `net1`
   84 bytes from 10.2.2.1 icmp_seq=2 ttl=64 time=0.319 ms
   ```
 * 🌞 analyser la table MAC d'un switch
-  * `show mac address-table`
+  * `show mac address-table`:
+  ```bash
+  IOU1#show mac address-table
+            Mac Address Table
+  -------------------------------------------
+
+  Vlan    Mac Address       Type        Ports
+  ----    -----------       --------    -----
+    1    aabb.cc00.0230    DYNAMIC     Et0/3
+    1    aabb.cc00.0301    DYNAMIC     Et0/3
+    1    aabb.cc00.0320    DYNAMIC     Et0/2
+  Total Mac Addresses for this criterion: 3
+  ```
   * comprendre/expliquer chaque ligne
 * 🐙 en lançant Wireshark sur les liens des switches, il y a des trames CDP qui circulent. Quoi qu'est-ce ?
 

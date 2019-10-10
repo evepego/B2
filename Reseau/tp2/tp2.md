@@ -27,9 +27,12 @@ Machine | `net1`
   Protocole utilisé : ICMP (Internet Control Message Protocol)
   * `ping 10.2.1.1`:  
   protocole utilisé: ICMP (Internet Control Message Protocol)
-  * analyser les échanges ARP
-    * utiliser Wireshark et mettre en évidence l'échange ARP entre les deux machines (`ARP Request` et `ARP Reply`)
-    * corréler avec les tables ARP des différentes machines
+  * analyser les échanges ARP :
+  ```
+  34	55.565450	Private_66:68:00	Broadcast	ARP (request)	64	Who has 10.2.1.2? Tell 10.2.1.1
+  35	55.566066	Private_66:68:01	Private_66:68:00	ARP (reply)	64	10.2.1.2 is at 00:50:79:66:68:01
+  36	55.566067	Private_66:68:01	Private_66:68:00	ARP	(reply) 64	10.2.1.2 is at 00:50:79:66:68:01
+  ```
 * 🌞 récapituler toutes les étapes (dans le compte-rendu, à l'écrit) quand `PC1` exécute `ping PC2` pour la première fois
   * échanges ARP
   * échange `ping`
@@ -67,9 +70,37 @@ Machine | `net1`
 
 #### ToDo
 
-* 🌞 mettre en place la topologie ci-dessus
 * 🌞 faire communiquer les trois PCs
-  * avec des `ping` qui fonctionnent
+  * `ping` PC1 à PC2 et PC3 :
+  ```bash
+  PC-1> ping 10.2.2.2
+  84 bytes from 10.2.2.2 icmp_seq=1 ttl=64 time=0.266 ms
+  84 bytes from 10.2.2.2 icmp_seq=2 ttl=64 time=0.303 ms
+  ^C
+  PC-1> ping 10.2.2.3
+  84 bytes from 10.2.2.3 icmp_seq=1 ttl=64 time=0.336 ms
+  84 bytes from 10.2.2.3 icmp_seq=2 ttl=64 time=0.877 ms
+  ```
+  * `ping` PC2 à PC1 et PC3 :
+  ```bash
+  PC-2> ping 10.2.2.1
+  84 bytes from 10.2.2.1 icmp_seq=1 ttl=64 time=0.166 ms
+  84 bytes from 10.2.2.1 icmp_seq=2 ttl=64 time=0.261 ms
+  ^C
+  PC-2> ping 10.2.2.3
+  84 bytes from 10.2.2.3 icmp_seq=1 ttl=64 time=0.391 ms
+  84 bytes from 10.2.2.3 icmp_seq=2 ttl=64 time=0.456 ms
+  ```
+  * `ping` PC3 à PC1 et PC2 :
+  ```bash
+  PC-3> ping 10.2.2.2
+  84 bytes from 10.2.2.2 icmp_seq=1 ttl=64 time=0.255 ms
+  84 bytes from 10.2.2.2 icmp_seq=2 ttl=64 time=0.348 ms
+  ^C
+  PC-3> ping 10.2.2.1
+  84 bytes from 10.2.2.1 icmp_seq=1 ttl=64 time=0.204 ms
+  84 bytes from 10.2.2.1 icmp_seq=2 ttl=64 time=0.319 ms
+  ```
 * 🌞 analyser la table MAC d'un switch
   * `show mac address-table`
   * comprendre/expliquer chaque ligne

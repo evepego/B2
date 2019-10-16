@@ -160,70 +160,70 @@ Si on considère les trois liens qui unissent les switches :
 On va regarder comment STP a été configuré.
 
 * 🌞 déterminer les informations STP
-```bash
-IOU1#show spanning-tree
+  ```bash
+  IOU1#show spanning-tree
 
-VLAN0001
-  Spanning tree enabled protocol rstp
-  Root ID    Priority    32769
-             Address     aabb.cc00.0100
-             This bridge is the root
-             Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
+  VLAN0001
+    Spanning tree enabled protocol rstp
+    Root ID    Priority    32769
+              Address     aabb.cc00.0100
+              This bridge is the root
+              Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
 
-  Bridge ID  Priority    32769  (priority 32768 sys-id-ext 1)
-             Address     aabb.cc00.0100
-             Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
-             Aging Time  300 sec
+    Bridge ID  Priority    32769  (priority 32768 sys-id-ext 1)
+              Address     aabb.cc00.0100
+              Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
+              Aging Time  300 sec
 
-Interface           Role Sts Cost      Prio.Nbr Type
-------------------- ---- --- --------- -------- --------------------------------
-Et0/0               Desg FWD 100       128.1    Shr
-Et0/1               Desg FWD 100       128.2    Shr
-Et0/2               Desg FWD 100       128.3    Shr
-Et0/3               Desg FWD 100       128.4    Shr
-Et1/0               Desg FWD 100       128.5    Shr
-Et1/1               Desg FWD 100       128.6    Shr
-Et1/2               Desg FWD 100       128.7    Shr
-Et1/3               Desg FWD 100       128.8    Shr
-Et2/0               Desg FWD 100       128.9    Shr
-Et2/1               Desg FWD 100       128.10   Shr
-Et2/2               Desg FWD 100       128.11   Shr
-Et2/3               Desg FWD 100       128.12   Shr
-Et3/0               Desg FWD 100       128.13   Shr
-Et3/1               Desg FWD 100       128.14   Shr
-Et3/2               Desg FWD 100       128.15   Shr
-Et3/3               Desg FWD 100       128.16   Shr
+  Interface           Role Sts Cost      Prio.Nbr Type
+  ------------------- ---- --- --------- -------- --------------------------------
+  Et0/0               Desg FWD 100       128.1    Shr
+  Et0/1               Desg FWD 100       128.2    Shr
+  Et0/2               Desg FWD 100       128.3    Shr
+  Et0/3               Desg FWD 100       128.4    Shr
+  Et1/0               Desg FWD 100       128.5    Shr
+  Et1/1               Desg FWD 100       128.6    Shr
+  Et1/2               Desg FWD 100       128.7    Shr
+  Et1/3               Desg FWD 100       128.8    Shr
+  Et2/0               Desg FWD 100       128.9    Shr
+  Et2/1               Desg FWD 100       128.10   Shr
+  Et2/2               Desg FWD 100       128.11   Shr
+  Et2/3               Desg FWD 100       128.12   Shr
+  Et3/0               Desg FWD 100       128.13   Shr
+  Et3/1               Desg FWD 100       128.14   Shr
+  Et3/2               Desg FWD 100       128.15   Shr
+  Et3/3               Desg FWD 100       128.16   Shr
 
-IOU1#show spanning-tree bridge
+  IOU1#show spanning-tree bridge
 
-                                                   Hello  Max  Fwd
-Vlan                         Bridge ID              Time  Age  Dly  Protocol
----------------- --------------------------------- -----  ---  ---  --------
-VLAN0001         32769 (32768,   1) aabb.cc00.0100    2    20   15  rstp
-IOU1#show spanning-tree summary
-Switch is in rapid-pvst mode
-Root bridge for: VLAN0001
-Extended system ID                      is enabled
-Portfast Default                        is disabled
-Portfast Edge BPDU Guard Default        is disabled
-Portfast Edge BPDU Filter Default       is disabled
-Loopguard Default                       is disabled
-PVST Simulation Default                 is enabled but inactive in rapid-pvst mode
-Bridge Assurance                        is enabled
-EtherChannel misconfig guard            is enabled
-Configured Pathcost method used is short
-UplinkFast                              is disabled
-BackboneFast                            is disabled
+                                                    Hello  Max  Fwd
+  Vlan                         Bridge ID              Time  Age  Dly  Protocol
+  ---------------- --------------------------------- -----  ---  ---  --------
+  VLAN0001         32769 (32768,   1) aabb.cc00.0100    2    20   15  rstp
+  IOU1#show spanning-tree summary
+  Switch is in rapid-pvst mode
+  Root bridge for: VLAN0001
+  Extended system ID                      is enabled
+  Portfast Default                        is disabled
+  Portfast Edge BPDU Guard Default        is disabled
+  Portfast Edge BPDU Filter Default       is disabled
+  Loopguard Default                       is disabled
+  PVST Simulation Default                 is enabled but inactive in rapid-pvst mode
+  Bridge Assurance                        is enabled
+  EtherChannel misconfig guard            is enabled
+  Configured Pathcost method used is short
+  UplinkFast                              is disabled
+  BackboneFast                            is disabled
 
-Name                   Blocking Listening Learning Forwarding STP Active
----------------------- -------- --------- -------- ---------- ----------
-VLAN0001                     0         0        0         16         16
----------------------- -------- --------- -------- ---------- ----------
-1 vlan                       0         0        0         16         16
-```
+  Name                   Blocking Listening Learning Forwarding STP Active
+  ---------------------- -------- --------- -------- ---------- ----------
+  VLAN0001                     0         0        0         16         16
+  ---------------------- -------- --------- -------- ---------- ----------
+  1 vlan                       0         0        0         16         16
+  ```
 * 🌞 faire un schéma en représentant les informations STP
 ![schéma](unknown.png)
-* 🌞 confirmer les informations STP
+* 🌞 confirmer les informations STP  
 IOU1 vers IOU2 le protocole STP a désactivé le lien.
 ![wireshark](1vers2.png)
 En regardant les autres liaisons on voit que la trame passe du switch 1 au switch 3 puis du switch 3 au switch 2 pour aller au PC2.
@@ -236,47 +236,47 @@ En regardant les autres liaisons on voit que la trame passe du switch 1 au switc
 
 * 🌞 changer la priorité d'un switch qui n'est pas le *root bridge*
 On donne la priorité au IOU1
-```bash
-IOU1(config)#spanning-tree vlan 1 priority 4096
-IOU1(config)#exit
-IOU1#
-*Oct 16 21:09:00.377: %SYS-5-CONFIG_I: Configured from console by console
-```
+  ```bash
+  IOU1(config)#spanning-tree vlan 1 priority 4096
+  IOU1(config)#exit
+  IOU1#
+  *Oct 16 21:09:00.377: %SYS-5-CONFIG_I: Configured from console by console
+  ```
 * 🌞 vérifier les changements
  * avec des commandes sur les switches  
   Grâce à cette commande je vois quelle interface est bloquée, c'est le switch 2 et le port eO/2.
-  ```bash
-      IOU2#show spanning-tree
+    ```bash
+        IOU2#show spanning-tree
 
-      VLAN0001
-        Spanning tree enabled protocol rstp
-        Root ID    Priority    4097
-                  Address     aabb.cc00.0200
-                  Cost        100
-                  Port        1 (Ethernet0/0)
-                  Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
+        VLAN0001
+          Spanning tree enabled protocol rstp
+          Root ID    Priority    4097
+                    Address     aabb.cc00.0200
+                    Cost        100
+                    Port        1 (Ethernet0/0)
+                    Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
 
-        Bridge ID  Priority    32769  (priority 32768 sys-id-ext 1)
-                  Address     aabb.cc00.0300
-                  Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
-                  Aging Time  300 sec
+          Bridge ID  Priority    32769  (priority 32768 sys-id-ext 1)
+                    Address     aabb.cc00.0300
+                    Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
+                    Aging Time  300 sec
 
-      Interface           Role Sts Cost      Prio.Nbr Type
-      ------------------- ---- --- --------- -------- --------------------------------
-      Et0/0               Root FWD 100       128.1    Shr
-      Et0/1               Desg FWD 100       128.2    Shr
-      Et0/2               Altn BLK 100       128.3    Shr
-      Et0/3               Desg FWD 100       128.4    Shr
-      Et1/0               Desg FWD 100       128.5    Shr
-      Et1/1               Desg FWD 100       128.6    Shr
-      Et1/2               Desg FWD 100       128.7    Shr
-      Et1/3               Desg FWD 100       128.8    Shr
-      Et2/0               Desg FWD 100       128.9    Shr
-      Et2/1               Desg FWD 100       128.10   Shr
-      Et2/2               Desg FWD 100       128.11   Shr
-      Et2/3               Desg FWD 100       128.12   Shr
-      Et3/0               Desg FWD 100       128.13   Shr
-  ```
+        Interface           Role Sts Cost      Prio.Nbr Type
+        ------------------- ---- --- --------- -------- --------------------------------
+        Et0/0               Root FWD 100       128.1    Shr
+        Et0/1               Desg FWD 100       128.2    Shr
+        Et0/2               Altn BLK 100       128.3    Shr
+        Et0/3               Desg FWD 100       128.4    Shr
+        Et1/0               Desg FWD 100       128.5    Shr
+        Et1/1               Desg FWD 100       128.6    Shr
+        Et1/2               Desg FWD 100       128.7    Shr
+        Et1/3               Desg FWD 100       128.8    Shr
+        Et2/0               Desg FWD 100       128.9    Shr
+        Et2/1               Desg FWD 100       128.10   Shr
+        Et2/2               Desg FWD 100       128.11   Shr
+        Et2/3               Desg FWD 100       128.12   Shr
+        Et3/0               Desg FWD 100       128.13   Shr
+    ```
 
 # III. Isolation
 
@@ -306,48 +306,48 @@ Machine | IP `net1` | VLAN
 
 * 🌞 mettre en place la topologie ci-dessus
 ![topo](topo1.png)
-```bash
-IOU1#sh vlan
+  ```bash
+  IOU1#sh vlan
 
-VLAN Name                             Status    Ports
----- -------------------------------- --------- -------------------------------
-1    default                          active    Et0/3, Et1/0, Et1/1, Et1/2
-                                                Et1/3, Et2/0, Et2/1, Et2/2
-                                                Et2/3, Et3/0, Et3/1, Et3/2
-                                                Et3/3
-10   pc1                              active    Et0/0
-20   pc2                              active    Et0/1, Et0/2
-30   pc3                              active
-1002 fddi-default                     act/unsup
-1003 token-ring-default               act/unsup
-1004 fddinet-default                  act/unsup
-1005 trnet-default                    act/unsup
+  VLAN Name                             Status    Ports
+  ---- -------------------------------- --------- -------------------------------
+  1    default                          active    Et0/3, Et1/0, Et1/1, Et1/2
+                                                  Et1/3, Et2/0, Et2/1, Et2/2
+                                                  Et2/3, Et3/0, Et3/1, Et3/2
+                                                  Et3/3
+  10   pc1                              active    Et0/0
+  20   pc2                              active    Et0/1, Et0/2
+  30   pc3                              active
+  1002 fddi-default                     act/unsup
+  1003 token-ring-default               act/unsup
+  1004 fddinet-default                  act/unsup
+  1005 trnet-default                    act/unsup
 
-VLAN Type  SAID       MTU   Parent RingNo BridgeNo Stp  BrdgMode Trans1 Trans2
----- ----- ---------- ----- ------ ------ -------- ---- -------- ------ ------
-1    enet  100001     1500  -      -      -        -    -        0      0
-10   enet  100010     1500  -      -      -        -    -        0      0
-20   enet  100020     1500  -      -      -        -    -        0      0
-30   enet  100030     1500  -      -      -        -    -        0      0
-1002 fddi  101002     1500  -      -      -        -    -        0      0
-1003 tr    101003     1500  -      -      -        -    -        0      0
+  VLAN Type  SAID       MTU   Parent RingNo BridgeNo Stp  BrdgMode Trans1 Trans2
+  ---- ----- ---------- ----- ------ ------ -------- ---- -------- ------ ------
+  1    enet  100001     1500  -      -      -        -    -        0      0
+  10   enet  100010     1500  -      -      -        -    -        0      0
+  20   enet  100020     1500  -      -      -        -    -        0      0
+  30   enet  100030     1500  -      -      -        -    -        0      0
+  1002 fddi  101002     1500  -      -      -        -    -        0      0
+  1003 tr    101003     1500  -      -      -        -    -        0      0
 
-IOU1#sh vlan br
+  IOU1#sh vlan br
 
-VLAN Name                             Status    Ports
----- -------------------------------- --------- -------------------------------
-1    default                          active    Et0/3, Et1/0, Et1/1, Et1/2
-                                                Et1/3, Et2/0, Et2/1, Et2/2
-                                                Et2/3, Et3/0, Et3/1, Et3/2
-                                                Et3/3
-10   pc1                              active    Et0/0
-20   pc2                              active    Et0/1, Et0/2
-30   pc3                              active
-1002 fddi-default                     act/unsup
-1003 token-ring-default               act/unsup
-1004 fddinet-default                  act/unsup
-1005 trnet-default                    act/unsup
-```
+  VLAN Name                             Status    Ports
+  ---- -------------------------------- --------- -------------------------------
+  1    default                          active    Et0/3, Et1/0, Et1/1, Et1/2
+                                                  Et1/3, Et2/0, Et2/1, Et2/2
+                                                  Et2/3, Et3/0, Et3/1, Et3/2
+                                                  Et3/3
+  10   pc1                              active    Et0/0
+  20   pc2                              active    Et0/1, Et0/2
+  30   pc3                              active
+  1002 fddi-default                     act/unsup
+  1003 token-ring-default               act/unsup
+  1004 fddinet-default                  act/unsup
+  1005 trnet-default                    act/unsup
+  ```
 * 🌞 faire communiquer les PCs deux à deux
   * vérifier que `PC2` ne peut joindre que `PC3`
     ```bash
@@ -423,7 +423,6 @@ Machine | IP `net1` | IP `net2` | VLAN
     PC-4> ping 10.2.10.2
     No gateway found
     ```
-* 🌞 mettre en évidence l'utilisation des VLANs avec Wireshark
 
 # IV. Need perfs
 

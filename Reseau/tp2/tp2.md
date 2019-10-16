@@ -127,17 +127,21 @@ Machine | `net1`
   * `show mac address-table` switch1 :
   ```bash
   IOU1#show mac address-table
-            Mac Address Table
+          Mac Address Table
   -------------------------------------------
 
   Vlan    Mac Address       Type        Ports
   ----    -----------       --------    -----
+    1    0050.7966.6800    DYNAMIC     Et0/1
+    1    0050.7966.6801    DYNAMIC     Et0/3
+    1    0050.7966.6802    DYNAMIC     Et0/2
     1    aabb.cc00.0230    DYNAMIC     Et0/3
     1    aabb.cc00.0301    DYNAMIC     Et0/3
     1    aabb.cc00.0320    DYNAMIC     Et0/2
-  Total Mac Addresses for this criterion: 3
+  Total Mac Addresses for this criterion: 6
   ```
-  * comprendre/expliquer chaque ligne
+  En faisant show mac address-table on voit les machines qui sont connectées à ce switch.
+  On voit aussi les deux autres switch du réseau avec les machines de chacun (avec leur MAC adresse).
 * 🐙 en lançant Wireshark sur les liens des switches, il y a des trames CDP qui circulent. Quoi qu'est-ce ?
 C'est le Cisco Discovery Protocol.
 
@@ -218,42 +222,62 @@ VLAN0001                     0         0        0         16         16
 1 vlan                       0         0        0         16         16
 ```
 * 🌞 faire un schéma en représentant les informations STP
-  * rôle des switches (qui est le root bridge)
-  * rôle de chacun des ports
+![schéma](stp.png)
 * 🌞 confirmer les informations STP
-![wireshark](cap2.png)
-  * vérifier que les trames passent bien par le chemin attendu (Wireshark)
-* 🌞 ainsi, déterminer quel lien a été désactivé par STP
+IOU1 vers IOU2 le protocole STP a désactivé le lien.
+![wireshark](1vers2.png)
+En regardant les autres liaisons on voit que la trame passe du switch 1 au switch 3 puis du switch 3 au switch 2 pour aller au PC2.
+![wireshark](1vers3.png)
+![wireshark](2vers3.png)
 * 🌞 faire un schéma qui explique le trajet d'une requête ARP lorsque PC1 ping PC3, et de sa réponse
-  * représenter **TOUTES** les trames ARP (n'oubliez pas les broadcasts)
+![schema](schema2.png)
 
 #### Reconfigurer STP
 
 * 🌞 changer la priorité d'un switch qui n'est pas le *root bridge*
+On donne la priorité au IOU1
+```bash
+IOU1(config)#spanning-tree vlan 1 priority 4096
+IOU1(config)#exit
+IOU1#
+*Oct 16 21:09:00.377: %SYS-5-CONFIG_I: Configured from console by console
+```
 * 🌞 vérifier les changements
-  * avec des commandes sur les switches
-  * 🐙 capturer les échanges qui suivent une reconfiguration STP avec Wireshark
+ * avec des commandes sur les switches  
+  Grâce à cette commande je vois quelle interface est bloquée, c'est le switch 2 et le port eO/2.
+  ```bash
+      IOU2#show spanning-tree
 
-#### 🐙 STP & Perfs
+      VLAN0001
+        Spanning tree enabled protocol rstp
+        Root ID    Priority    4097
+                  Address     aabb.cc00.0200
+                  Cost        100
+                  Port        1 (Ethernet0/0)
+                  Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
 
-Si vous avez lancé Wireshark sur un lien entre un PC et un Switch, vous avez vu qu'il y a toujours des trames STP qui circulent...
-* un peu con non ? C'est un PC, il enverra jamais de trames STP
-* aussi avec STP, quand on branche un PC, le lien mettra plusieurs secondes avant de passer en *forwarding* et ainsi transmettre de la donnée
-* l'idéal ça serait de désactiver l'envoi de trames STP sur l'interface du switch (ça évite de cramer de la bande passante et du calcul CPU pour rien, générer du trafic inutile, etc.)
-* sauuuuf que si un p'tit malin branche des switches là-dessus, il pourrait tout péter en créant une boucle
-* deux fonctionnalités à mettre en place : 
-  * `portfast` : marque un port comme *"edge"* dans la topologie STP. Un port *edge* est considéré comme une extrémité de la topologie (= un client branché dessus, port *access*). *Port**fast*** parce que ça va permettre au port de s'allumer plus rapidement (sans passer par les états *listening* et *learning* pendant 15 secondes chacun par défaut) et d'être disponible instantanément
-    * on peut voir l'état d'un port (forward, listening, learning, blocking avec `show spanning-tree vlan 1`)
-  * `bpduguard` : permet de shutdown le port s'il reçoit des *BPDU* (pour rappel : un *BPDU* c'est un message STP)  
+        Bridge ID  Priority    32769  (priority 32768 sys-id-ext 1)
+                  Address     aabb.cc00.0300
+                  Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
+                  Aging Time  300 sec
+
+      Interface           Role Sts Cost      Prio.Nbr Type
+      ------------------- ---- --- --------- -------- --------------------------------
+      Et0/0               Root FWD 100       128.1    Shr
+      Et0/1               Desg FWD 100       128.2    Shr
+      Et0/2               Altn BLK 100       128.3    Shr
+      Et0/3               Desg FWD 100       128.4    Shr
+      Et1/0               Desg FWD 100       128.5    Shr
+      Et1/1               Desg FWD 100       128.6    Shr
+      Et1/2               Desg FWD 100       128.7    Shr
+      Et1/3               Desg FWD 100       128.8    Shr
+      Et2/0               Desg FWD 100       128.9    Shr
+      Et2/1               Desg FWD 100       128.10   Shr
+      Et2/2               Desg FWD 100       128.11   Shr
+      Et2/3               Desg FWD 100       128.12   Shr
+      Et3/0               Desg FWD 100       128.13   Shr
+  ```
   
-Idem pour les trames CDP !
-
-🐙 ToDo :
-  * [activer ces fonctionnalités (*portfast* et *bpduguard*) et activer le filtre BPDU](/memo/cli-cisco.md#stp) sur les interfaces où c'est nécessaire (marqué comme *edge* dans la topologie STP)
-  * aussi [désactiver l'envoi de trames CDP](/memo/cli-cisco.md#cdp) sur ces ports
-    * prouver avec Wireshark que le switch n'envoie plus de BPDU ni de trames CDP
-    * faites une capture avant et une capture après les manips pour le prouver :)
-
 # III. Isolation
 
 ## 1. Simple
@@ -281,11 +305,68 @@ Machine | IP `net1` | VLAN
 #### ToDo
 
 * 🌞 mettre en place la topologie ci-dessus
-  * voir [les commandes dédiées à la manipulation de VLANs](/memo/cli-cisco.md#vlan)
+```bash
+IOU1#sh vlan
+
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Et0/3, Et1/0, Et1/1, Et1/2
+                                                Et1/3, Et2/0, Et2/1, Et2/2
+                                                Et2/3, Et3/0, Et3/1, Et3/2
+                                                Et3/3
+10   pc1                              active    Et0/0
+20   pc2                              active    Et0/1, Et0/2
+30   pc3                              active
+1002 fddi-default                     act/unsup
+1003 token-ring-default               act/unsup
+1004 fddinet-default                  act/unsup
+1005 trnet-default                    act/unsup
+
+VLAN Type  SAID       MTU   Parent RingNo BridgeNo Stp  BrdgMode Trans1 Trans2
+---- ----- ---------- ----- ------ ------ -------- ---- -------- ------ ------
+1    enet  100001     1500  -      -      -        -    -        0      0
+10   enet  100010     1500  -      -      -        -    -        0      0
+20   enet  100020     1500  -      -      -        -    -        0      0
+30   enet  100030     1500  -      -      -        -    -        0      0
+1002 fddi  101002     1500  -      -      -        -    -        0      0
+1003 tr    101003     1500  -      -      -        -    -        0      0
+
+IOU1#sh vlan br
+
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Et0/3, Et1/0, Et1/1, Et1/2
+                                                Et1/3, Et2/0, Et2/1, Et2/2
+                                                Et2/3, Et3/0, Et3/1, Et3/2
+                                                Et3/3
+10   pc1                              active    Et0/0
+20   pc2                              active    Et0/1, Et0/2
+30   pc3                              active
+1002 fddi-default                     act/unsup
+1003 token-ring-default               act/unsup
+1004 fddinet-default                  act/unsup
+1005 trnet-default                    act/unsup
+```
 * 🌞 faire communiquer les PCs deux à deux
   * vérifier que `PC2` ne peut joindre que `PC3`
-  * vérifier que `PC1` ne peut joindre personne alors qu'il est dans le même réseau (sad)
+    ```bash
+    PC-2> ping 10.2.3.1
+    host (10.2.3.1) not reachable
 
+    PC-2> ping 10.2.3.3
+    84 bytes from 10.2.3.3 icmp_seq=1 ttl=64 time=1.780 ms
+    84 bytes from 10.2.3.3 icmp_seq=2 ttl=64 time=2.403 ms
+    ^C
+    PC-2>
+    ```
+  * vérifier que `PC1` ne peut joindre personne alors qu'il est dans le même réseau (sad)
+    ```bash
+    PC-1> ping 10.2.3.2
+    host (10.2.3.2) not reachable
+
+    PC-1> ping 10.2.3.3
+    host (10.2.3.3) not reachable
+    ```
 ## 2. Avec trunk
 
 #### Topologie
@@ -312,10 +393,35 @@ Machine | IP `net1` | IP `net2` | VLAN
 
 #### ToDo
 
-* 🌞 mettre en place la topologie ci-dessus
 * 🌞 faire communiquer les PCs deux à deux
   * vérifier que `PC1` ne peut joindre que `PC3`
+    ```bash
+    PC-1> ping 10.2.20.1
+    No gateway found
+
+    PC-1> ping 10.2.10.2
+    84 bytes from 10.2.10.2 icmp_seq=1 ttl=64 time=0.328 ms
+    84 bytes from 10.2.10.2 icmp_seq=2 ttl=64 time=0.401 ms
+    84 bytes from 10.2.10.2 icmp_seq=3 ttl=64 time=0.335 ms
+    
+    PC-1> ping 10.2.20.2
+    No gateway found
+    ```
   * vérifier que `PC4` ne peut joindre que `PC2`
+    ```bash
+    PC-4> ping 10.2.10.1
+    No gateway found
+
+    PC-4> ping 10.2.20.1
+    84 bytes from 10.2.20.1 icmp_seq=1 ttl=64 time=0.853 ms
+    84 bytes from 10.2.20.1 icmp_seq=2 ttl=64 time=0.355 ms
+    84 bytes from 10.2.20.1 icmp_seq=3 ttl=64 time=0.322 ms
+    84 bytes from 10.2.20.1 icmp_seq=4 ttl=64 time=0.550 ms
+    84 bytes from 10.2.20.1 icmp_seq=5 ttl=64 time=0.389 ms
+
+    PC-4> ping 10.2.10.2
+    No gateway found
+    ```
 * 🌞 mettre en évidence l'utilisation des VLANs avec Wireshark
 
 # IV. Need perfs
@@ -337,8 +443,6 @@ Pareil qu'en [III.2.](#2-avec-trunk) à part le lien entre SW1 et SW2 qui est do
 ```
 #### Plan d'adressage
 
-Pareil qu'en [III.2.](#2-avec-trunk).
-
 Machine | IP `net1` | IP `net2` | VLAN
 --- | --- | --- | ---
 `PC1` | `10.2.10.1/24` | X | 10
@@ -349,8 +453,4 @@ Machine | IP `net1` | IP `net2` | VLAN
 #### ToDo
 
 * 🌞 mettre en place la topologie ci-dessus
-  * configurer LACP entre `SW1` et `SW2`
-  * utiliser Wireshark pour mettre en évidence l'utilisation de trames LACP
-  * **vérifier avec un `show ip interface po1` que la bande passante a bien été doublée**
-
-> Pas de failover possible sur les IOUs malheureusement :( (voir [ce doc](https://www.cisco.com/c/en/us/td/docs/switches/blades/3020/software/release/12-2_58_se/configuration/guide/3020_scg/swethchl.pdf), dernière section. Pas de link state dans les IOUs)
+![topo2](topo2.png)

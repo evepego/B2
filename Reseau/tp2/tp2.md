@@ -28,17 +28,39 @@ Machine | `net1`
   * `ping 10.2.1.1`:  
   protocole utilisé: ICMP (Internet Control Message Protocol)
   * analyser les échanges ARP :
-  ```
-  34	55.565450	Private_66:68:00	Broadcast	ARP (request)	64	Who has 10.2.1.2? Tell 10.2.1.1
-  35	55.566066	Private_66:68:01	Private_66:68:00	ARP (reply)	64	10.2.1.2 is at 00:50:79:66:68:01
-  36	55.566067	Private_66:68:01	Private_66:68:00	ARP	(reply) 64	10.2.1.2 is at 00:50:79:66:68:01
-  ```
-* 🌞 récapituler toutes les étapes (dans le compte-rendu, à l'écrit) quand `PC1` exécute `ping PC2` pour la première fois
+    ```
+    34	55.565450	Private_66:68:00	Broadcast	ARP (request)	64	Who has 10.2.1.2? Tell 10.2.1.1
+    35	55.566066	Private_66:68:01	Private_66:68:00	ARP (reply)	64	10.2.1.2 is at 00:50:79:66:68:01
+    36	55.566067	Private_66:68:01	Private_66:68:00	ARP	(reply) 64	10.2.1.2 is at 00:50:79:66:68:01
+    ```
+
+  * corréler avec les tables ARP des différentes machines
+    ```bash
+    PC-1> arp
+    00:50:79:66:68:00  10.2.1.2 expires in 113 seconds
+    ```
+    ```bash
+    PC-2> arp
+    00:50:79:66:68:01  10.2.1.1 expires in 84 seconds
+    ```
+
+* 🌞 récapitulatif de toutes les étapes quand PC1 exécute ping PC2 pour la première fois :
   * échanges ARP
-  * échange `ping`
+  Quand le PC1 ping le PC2 pour la première fois, 3 lignes ARP s'affichent dans le Wireshark : 1 request et 2 reply. Le protocole ARP permet de récupérer l'addresse Mac du PC2 pour pouvoir communiquer avec lui.
+  Request = la demande du PC1 vers le PC2
+  Reply = la réponse du PC2 vers le PC1
+* échange ping  
+  L'échange de ping utilise le protocole utilisé est ICMP
 * 🌞 expliquer...
   * pourquoi le switch n'a pas besoin d'IP
-  * pourquoi les machines ont besoin d'une IP pour pouvoir se `ping`
+    
+    Car il transmet juste les messages  
+    
+
+  * pourquoi les machines ont besoin d'une IP pour pouvoir se ping
+    
+    Pour savoir à qui distribuer les paquets
+    
 
 # II. More switches
 

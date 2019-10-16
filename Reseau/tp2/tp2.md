@@ -142,8 +142,8 @@ Machine | `net1`
   ```
   En faisant show mac address-table on voit les machines qui sont connectées à ce switch.
   On voit aussi les deux autres switch du réseau avec les machines de chacun (avec leur MAC adresse).
-* 🐙 en lançant Wireshark sur les liens des switches, il y a des trames CDP qui circulent. Quoi qu'est-ce ?
-C'est le Cisco Discovery Protocol.
+* 🐙 en lançant Wireshark sur les liens des switches, il y a des trames CDP qui circulent. Quoi qu'est-ce ?  
+Les trames du protocole CDP (Cisco Discovery Protocol) contiennent des informations sur les propriétés du port, connexion et/ou périphérique.
 
 #### Mise en évidence du Spanning Tree Protocol
 

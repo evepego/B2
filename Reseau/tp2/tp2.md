@@ -222,7 +222,7 @@ VLAN0001                     0         0        0         16         16
 1 vlan                       0         0        0         16         16
 ```
 * 🌞 faire un schéma en représentant les informations STP
-![schéma](stp.png)
+![schéma](unknown.png)
 * 🌞 confirmer les informations STP
 IOU1 vers IOU2 le protocole STP a désactivé le lien.
 ![wireshark](1vers2.png)
@@ -277,7 +277,7 @@ IOU1#
       Et2/3               Desg FWD 100       128.12   Shr
       Et3/0               Desg FWD 100       128.13   Shr
   ```
-  
+
 # III. Isolation
 
 ## 1. Simple
@@ -305,6 +305,7 @@ Machine | IP `net1` | VLAN
 #### ToDo
 
 * 🌞 mettre en place la topologie ci-dessus
+![topo](topo1.png)
 ```bash
 IOU1#sh vlan
 

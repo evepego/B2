@@ -54,6 +54,10 @@ Réseaux | `net1` |  `net2` |  `net3` |  `netP`
  `net3` | ❌ | ✅ | ✅ | ✅
  `netP` | ❌ | ✅ | ✅ | ✅
 
+<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    AJOUTER LES GATEWAY A CHAQUE PC ET NE PAS AUTORISER VLAN 10
+-->!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 **Instructions** (pretty straightforward) :
 * 🌞 Prove me that your setup is actually working
   * `ping` PC1 aux à PC2, PC3, PC4 et P1 :

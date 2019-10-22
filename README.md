@@ -1,15 +1,15 @@
-# B2
+# Bachelor 2
 
 Ici, vous trouverez l'ensemble de mes TPs de Bachelor 2.
 
-## Réseau
+## Réseau :
 
 [TPs](./Reseau/README.md)
 
-## Php
+## Php :
 
 [TPs](./Php/README.md)
 
-## Linux
+## Linux :
 
 [TPs](./Linux/README.md)

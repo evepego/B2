@@ -1,5 +1,4 @@
 from dic import villes
-import math
 
 # Vitesse maximale en km/h.
 vit_max = 90

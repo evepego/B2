@@ -1,4 +1,16 @@
 villes = {
+    "Bayonne": {
+        "Bordeaux": 184,
+        "Lille": 986,
+        "Mulhouse": 1013,
+        "Orthez": 74,
+        "Pau": 112,
+        "Paris": 771,
+        "Poitiers": 435,
+        "Royan": 319,
+        "Toulouse": 300
+    },
+
     "Bordeaux": {
         "Bayonne": 184,        
         "Lille": 801,
@@ -11,18 +23,9 @@ villes = {
         "Toulouse": 245
     },
 
-    "Bayonne": {
-        "Lille": 986,
-        "Mulhouse": 1013,
-        "Orthez": 74,
-        "Pau": 112,
-        "Paris": 771,
-        "Poitiers": 435,
-        "Royan": 319,
-        "Toulouse": 300
-    },
-
     "Lille": {
+        "Bordeaux": 801,
+        "Bayonne": 986,
         "Pau": 1010,
         "Mulhouse": 595,
         "Orthez": 1028,
@@ -33,6 +36,9 @@ villes = {
     },
 
     "Mulhouse": {
+        "BOrdeaux"
+        "Bayonne"
+        "Lille": 595,
         "Pau": 1039,
         "Orthez": 1057,
         "Paris": 538,
@@ -72,6 +78,6 @@ villes = {
         "Toulouse": 371,
     },
     "Toulouse":{
-        
+
     }
 }

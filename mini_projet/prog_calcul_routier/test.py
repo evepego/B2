@@ -1,1 +1,2 @@
-print('hello')
+time = 56
+time.strftime('%Y')

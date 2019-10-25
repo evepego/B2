@@ -36,8 +36,8 @@ villes = {
     },
 
     "Mulhouse": {
-        "BOrdeaux"
-        "Bayonne"
+        "Bordeaux"; 832,
+        "Bayonne": 1013,
         "Lille": 595,
         "Pau": 1039,
         "Orthez": 1057,
@@ -48,6 +48,10 @@ villes = {
     },
 
     "Orthez": {
+        "Bayonne": 74,
+        "Bordeaux": 191,
+        "Lille": 1028,
+        "Mulhouse": 1057,
         "Pau": 47,
         "Paris": 770,
         "Poitiers": 479,
@@ -56,6 +60,11 @@ villes = {
     },
 
     "Pau": {
+        "Bayonne": 
+        "Bordeaux": 
+        "Lille": 
+        "Mulhouse": 1039
+        "Orthez": 47,
         "Paris": 796,
         "Poitiers": 461,
         "Royan": 344,

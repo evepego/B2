@@ -1,4 +1,5 @@
 from dic import villes
+import datetime
 
 # Vitesse maximale en km/h.
 vit_max = 90
@@ -7,6 +8,7 @@ pause = 15
 # Temps pour arriver à la vitesse maximale (90 km/h) en minutes.
 temps_vit_max = 9
 temps = 0
+
 
 # On demande de saisir une ville de départ et une ville d'arrivée.
 vil_dep = input("Choisir une ville de départ : \n (Bordeaux-Bayonne-Lille-Mulhouse-Orthez- \n Pau-Paris-Poitiers-Royan-Toulouse) \n ")
@@ -29,6 +31,8 @@ if vil_dep != vil_arr :
     temps_sans_pause = distance/vit_max
     # Déterminer le temps total.
     temps_total = temps_pause + temps_sans_pause + temps_vit_max
+    # Formatage du temps.
+    
     # Ligne pour remplir le tableau.
     tab.extend((vil_dep, vil_arr, distance, temps_total))
 print(tab)

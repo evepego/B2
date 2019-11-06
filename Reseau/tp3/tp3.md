@@ -2,7 +2,7 @@
 
 # I. *Router-on-a-stick*
 
-Schéma ~~moche ftw~~ beau :grin: :
+Schéma ~~moche ftw~~ mieux :sweat_smile: :
 
 ![schéma](tp3.gns3.png)
 

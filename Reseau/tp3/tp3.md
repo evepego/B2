@@ -60,44 +60,32 @@ Réseaux | `net1` |  `net2` |  `net3` |  `netP`
 
 **Instructions** (pretty straightforward) :
 * 🌞 Prove me that your setup is actually working
+
   * `ping` PC1 aux à PC2, PC3, PC4 et P1 :
     ```bash
     PC-1> ping 10.3.20.2
-    No gateway found
+    host (10.3.10.254) not reachable
 
-    PC-1> ping 10.3.20.3
-    No gateway found
+    PC-1> ping 10.03.20.3
+    host (10.3.10.254) not reachable
 
     PC-1> ping 10.3.30.4
-    No gateway found
+    host (10.3.10.254) not reachable
 
     PC-1> ping 10.3.40.1
-    No gateway found
+    host (10.3.10.254) not reachable
     ```
-  * `ping` PC2 à PC3, PC4 et P1 :
+  * test des autres `ping` :
+  
     ```bash
-    PC-2> ping 10.3.20.3
-    84 bytes from 10.3.20.3 icmp_seq=1 ttl=64 time=0.185 ms
-    84 bytes from 10.3.20.3 icmp_seq=2 ttl=64 time=0.357 ms
-    
-    PC-2> ping 10.3.30.3
-    No gateway found
+    PC-4> ping 10.3.20.3
+    84 bytes from 10.3.20.3 icmp_seq=1 ttl=63 time=19.532 ms
 
     PC-2> ping 10.3.40.1
-    No gateway found
-    ```
-  * `ping` PC3 à PC4 et P1 :
-    ```bash
-    PC-3> ping 10.3.30.3
-    No gateway found
+    84 bytes from 10.3.40.1 icmp_seq=1 ttl=63 time=20.889 ms
 
-    PC-3> ping 10.3.40.1
-    No gateway found
-    ```
-  * `ping` PC4 à P1 :
-    ```bash
-    PC-4> ping 10.3.40.1
-    No gateway found
+    P1> ping 10.3.30.254
+    84 bytes from 10.3.30.254 icmp_seq=1 ttl=255 time=4.082 ms
     ```
 
 **CHECK MATE !**

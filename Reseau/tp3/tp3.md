@@ -54,10 +54,6 @@ Réseaux | `net1` |  `net2` |  `net3` |  `netP`
  `net3` | ❌ | ✅ | ✅ | ✅
  `netP` | ❌ | ✅ | ✅ | ✅
 
-<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    AJOUTER LES GATEWAY A CHAQUE PC ET NE PAS AUTORISER VLAN 10
--->!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 **Instructions** (pretty straightforward) :
 * 🌞 Prove me that your setup is actually working
 
@@ -76,7 +72,7 @@ Réseaux | `net1` |  `net2` |  `net3` |  `netP`
     host (10.3.10.254) not reachable
     ```
   * test des autres `ping` :
-  
+
     ```bash
     PC-4> ping 10.3.20.3
     84 bytes from 10.3.20.3 icmp_seq=1 ttl=63 time=19.532 ms
@@ -95,8 +91,6 @@ Réseaux | `net1` |  `net2` |  `net3` |  `netP`
 **Creusez-vous un peu la tête.**  
 
 Le but est de mettre en place une infra qui répond au besoin des bureaux représentés ci-dessous :
-
-![Yo](./pics/schema-II.png)
 
 * `R1` `R3` `R4` et `R5` sont des bureaux avec des utilisateurs
 * `R2` est une salle serveur 
@@ -136,9 +130,6 @@ Imprimantes | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ |
 ---
 
 **TODO**
-* setup this shit in GNS3
-  * matériel autorisé : routeurs (Cisco 3640), switches (IOU L2 Cisco), VPCS
-  * outils : routage statique, VLAN, votre talent
 * pour la partie soft
   * 🌞 dimensionnez intelligemment les réseaux
     * prévoyez une augmentation légère
@@ -165,14 +156,3 @@ Imprimantes | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ |
 * n'oubliez pas de sauvegarder la configuration des équipements réseau et celle des VPCS
 
 ---
-
-**Bonus**
-* 🐙 mettre en place les exceptions
-  * documentez-vous, proposez des choses
-* 🐙 mettre en place un serveur DHCP 
-  * il devra 
-    * s'intégrer à l'existant
-    * être installé sur une VM dédiée (Virtualbox, Workstation)
-    * permettre l'attribution d'IPs pour tous les PCs clients (admins, users, stagiaires)
-    * libre choix de l'OS (m'enfin, déconnez pas, on va pas mettre un Windows Server 2016 si ?...)
-  * mise en place d'un test avec l'ajout d'un nouveau client

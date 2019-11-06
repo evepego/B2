@@ -12,7 +12,7 @@
     "show_grid": true,
     "show_interface_labels": true,
     "show_layers": false,
-    "snap_to_grid": true,
+    "snap_to_grid": false,
     "supplier": null,
     "topology": {
         "computes": [],
@@ -22,8 +22,8 @@
                 "locked": false,
                 "rotation": 0,
                 "svg": "<svg height=\"22\" width=\"22\"><text fill=\"#000000\" fill-opacity=\"1.0\" font-family=\"TypeWriter\" font-size=\"10.0\" font-weight=\"bold\">10</text></svg>",
-                "x": -4,
-                "y": 35,
+                "x": 45,
+                "y": 13,
                 "z": 1
             },
             {
@@ -31,8 +31,8 @@
                 "locked": false,
                 "rotation": 0,
                 "svg": "<svg height=\"22\" width=\"22\"><text fill=\"#000000\" fill-opacity=\"1.0\" font-family=\"TypeWriter\" font-size=\"10.0\" font-weight=\"bold\">20</text></svg>",
-                "x": 14,
-                "y": -28,
+                "x": 48,
+                "y": -38,
                 "z": 1
             },
             {
@@ -40,8 +40,8 @@
                 "locked": false,
                 "rotation": 0,
                 "svg": "<svg height=\"22\" width=\"22\"><text fill=\"#000000\" fill-opacity=\"1.0\" font-family=\"TypeWriter\" font-size=\"10.0\" font-weight=\"bold\">20</text></svg>",
-                "x": 174,
-                "y": -27,
+                "x": 181,
+                "y": -31,
                 "z": 1
             },
             {
@@ -49,8 +49,8 @@
                 "locked": false,
                 "rotation": 0,
                 "svg": "<svg height=\"22\" width=\"22\"><text fill=\"#000000\" fill-opacity=\"1.0\" font-family=\"TypeWriter\" font-size=\"10.0\" font-weight=\"bold\">40</text></svg>",
-                "x": 198,
-                "y": -19,
+                "x": 241,
+                "y": -22,
                 "z": 1
             },
             {
@@ -58,8 +58,8 @@
                 "locked": false,
                 "rotation": 0,
                 "svg": "<svg height=\"22\" width=\"22\"><text fill=\"#000000\" fill-opacity=\"1.0\" font-family=\"TypeWriter\" font-size=\"10.0\" font-weight=\"bold\">30</text></svg>",
-                "x": 194,
-                "y": 10,
+                "x": 204,
+                "y": 11,
                 "z": 1
             }
         ],

@@ -2,25 +2,9 @@
 
 # I. *Router-on-a-stick*
 
-Schéma moche ftw :
+Schéma ~~moche ftw~~ beau :grin: :
 
-```
-             +--+
-             |R1|
-             +-++
-               |
-               |                    +---+
-               |          +---------+PC4|
-+---+        +-+-+      +---+       +---+
-|PC1+--------+SW1+------+SW2|
-+---+        +-+-+      +-+--+
-               |          |  |
-               |          |  +------+--+
-               |          |         |P1|
-             +-+-+      +-+-+       +--+
-             |PC2|      |PC3|
-             +---+      +---+
-```
+![schéma](tp3.gns3.png)
 
 **Tableau des réseaux utilisés**
 

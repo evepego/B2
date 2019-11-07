@@ -1,0 +1,5 @@
+Chiffrement asymétrique :
+
+- 2 paires de cles : être sur que se soit la bonne personne qui l'ai envoyé + lien mathématique
+clé publique de chiffrement
+clé privée de déchiffrement
